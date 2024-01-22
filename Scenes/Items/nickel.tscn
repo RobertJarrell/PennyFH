@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://coipvkhmtjay4"]
+
+[ext_resource type="Script" path="res://Scripts/Items/penny.gd" id="1_wgsxa"]
+[ext_resource type="Script" path="res://Scripts/Components/collect_box.gd" id="2_ubr7m"]
+[ext_resource type="Script" path="res://Scripts/Components/item_move_component.gd" id="3_r3mmf"]
+[ext_resource type="Resource" uid="uid://58mtfjk4cl6r" path="res://Resources/Item/nickle.tres" id="4_bykqd"]
+[ext_resource type="Script" path="res://Scripts/Components/spawn_component.gd" id="5_bxegf"]
+[ext_resource type="PackedScene" uid="uid://de6yi44cen3xq" path="res://Scenes/fall_indicator.tscn" id="6_42tn4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cb0yo"]
+albedo_color = Color(0.8, 0.8, 0.8, 1)
+metallic = 0.69
+roughness = 0.38
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y24fu"]
+material = SubResource("StandardMaterial3D_cb0yo")
+top_radius = 0.225
+bottom_radius = 0.225
+height = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5qhao"]
+height = 0.2
+radius = 0.225
+
+[node name="Nickel" type="Node3D"]
+script = ExtResource("1_wgsxa")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="NickelMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_y24fu")
+
+[node name="CollectBox" type="Area3D" parent="." node_paths=PackedStringArray("model")]
+collision_mask = 3
+script = ExtResource("2_ubr7m")
+sheet = ExtResource("4_bykqd")
+model = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectBox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_5qhao")
+
+[node name="ItemMoveComponent" type="Node" parent="." node_paths=PackedStringArray("model")]
+script = ExtResource("3_r3mmf")
+sheet = ExtResource("4_bykqd")
+model = NodePath("..")
+
+[node name="ShadowSpawner" type="Node3D" parent="."]
+script = ExtResource("5_bxegf")
+packed_scene = ExtResource("6_42tn4")
+
+[connection signal="body_entered" from="CollectBox" to="CollectBox" method="_on_body_entered"]

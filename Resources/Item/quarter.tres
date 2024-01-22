@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemSheet" load_steps=2 format=3 uid="uid://euu1ng8uwvpp"]
+
+[ext_resource type="Script" path="res://Resources/Item/item_sheet.gd" id="1_syo3p"]
+
+[resource]
+script = ExtResource("1_syo3p")
+fall_speed = 5.0
+value = 250

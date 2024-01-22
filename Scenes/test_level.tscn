@@ -1,0 +1,122 @@
+[gd_scene load_steps=21 format=3 uid="uid://4rqaiwxd6xag"]
+
+[ext_resource type="Script" path="res://Scripts/level_manager.gd" id="1_5ecrq"]
+[ext_resource type="Resource" uid="uid://bxnl7v024in85" path="res://Resources/game_data.tres" id="2_njujv"]
+[ext_resource type="PackedScene" uid="uid://b3ey7e5i1kegs" path="res://Scenes/Items/penny.tscn" id="3_lyqu6"]
+[ext_resource type="Resource" uid="uid://d22fpwywh5p23" path="res://Resources/test_level.tres" id="3_ybs12"]
+[ext_resource type="Script" path="res://Scripts/CoinSpawner.gd" id="4_rqrv8"]
+[ext_resource type="Script" path="res://Scripts/Components/spawn_component.gd" id="5_hjrmd"]
+[ext_resource type="PackedScene" uid="uid://d3obwk3m17tm1" path="res://Scenes/Items/dime.tscn" id="6_3v68y"]
+[ext_resource type="PackedScene" uid="uid://coipvkhmtjay4" path="res://Scenes/Items/nickel.tscn" id="6_pmplk"]
+[ext_resource type="PackedScene" uid="uid://dw3sc7xskdp0d" path="res://Scenes/UI/basic_ui.tscn" id="7_b2k31"]
+[ext_resource type="PackedScene" uid="uid://dly7q4d8jqpj8" path="res://Scenes/Player/player_token.tscn" id="7_t1i21"]
+[ext_resource type="PackedScene" uid="uid://sdj3t3dnwtrr" path="res://Scenes/Items/quarter.tscn" id="9_5b13j"]
+[ext_resource type="PackedScene" uid="uid://i13skjvhiidk" path="res://Scenes/Items/half_dollar.tscn" id="10_sokhm"]
+[ext_resource type="PackedScene" uid="uid://byvh4dn8hc04w" path="res://Scenes/Items/silver_dollar.tscn" id="11_o32q8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtrks"]
+albedo_color = Color(0.494118, 0.337255, 0.0745098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v28eh"]
+albedo_color = Color(0.419608, 0.466667, 0.717647, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pffx2"]
+size = Vector3(1, 0.25, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u78pm"]
+size = Vector3(1, 0.25, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80yk2"]
+sky_top_color = Color(0.917647, 0.854902, 0.537255, 1)
+sky_horizon_color = Color(0.94902, 0.509804, 0.466667, 1)
+
+[sub_resource type="Sky" id="Sky_myvep"]
+sky_material = SubResource("ProceduralSkyMaterial_80yk2")
+
+[sub_resource type="Environment" id="Environment_y8gni"]
+background_mode = 2
+sky = SubResource("Sky_myvep")
+fog_enabled = true
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="RoomLayout" type="Node3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RoomLayout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+radius = 50.0
+height = 1.0
+material = SubResource("StandardMaterial3D_xtrks")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="RoomLayout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+use_collision = true
+inner_radius = 45.5
+outer_radius = 50.0
+sides = 32
+ring_sides = 16
+material = SubResource("StandardMaterial3D_v28eh")
+
+[node name="RaisedLift" type="StaticBody3D" parent="RoomLayout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.87299, 0.45019, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomLayout/RaisedLift"]
+shape = SubResource("BoxShape3D_pffx2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomLayout/RaisedLift"]
+mesh = SubResource("BoxMesh_u78pm")
+
+[node name="CameraPoint" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPoint"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 6)
+current = true
+fov = 90.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y8gni")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5.96046e-08, 1, 0, -1, 5.96046e-08, 0, 0, 0)
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("1_5ecrq")
+game_data = ExtResource("2_njujv")
+level_sheet = ExtResource("3_ybs12")
+
+[node name="CoinSpawner" type="Node3D" parent="."]
+script = ExtResource("4_rqrv8")
+level_sheet = ExtResource("3_ybs12")
+
+[node name="PennySpawner" type="Node3D" parent="CoinSpawner"]
+script = ExtResource("5_hjrmd")
+packed_scene = ExtResource("3_lyqu6")
+
+[node name="NickelSpawner" type="Node3D" parent="CoinSpawner"]
+script = ExtResource("5_hjrmd")
+packed_scene = ExtResource("6_pmplk")
+
+[node name="DimeSpawner" type="Node3D" parent="CoinSpawner"]
+script = ExtResource("5_hjrmd")
+packed_scene = ExtResource("6_3v68y")
+
+[node name="QuarterSpawner" type="Node3D" parent="CoinSpawner"]
+script = ExtResource("5_hjrmd")
+packed_scene = ExtResource("9_5b13j")
+
+[node name="HalfDollarSpawner" type="Node3D" parent="CoinSpawner"]
+script = ExtResource("5_hjrmd")
+packed_scene = ExtResource("10_sokhm")
+
+[node name="SilverDollarSpawner" type="Node3D" parent="CoinSpawner"]
+script = ExtResource("5_hjrmd")
+packed_scene = ExtResource("11_o32q8")
+
+[node name="SpawnTimer" type="Timer" parent="CoinSpawner"]
+one_shot = true
+
+[node name="PlayerToken" parent="." instance=ExtResource("7_t1i21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="BasicUI" parent="." instance=ExtResource("7_b2k31")]

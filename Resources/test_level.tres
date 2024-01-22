@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://d22fpwywh5p23"]
+
+[ext_resource type="Script" path="res://Resources/level_data.gd" id="1_ft6nk"]
+
+[resource]
+script = ExtResource("1_ft6nk")
+spawn_count = 100
+target_score = 1000
+min_spawn_range = 0.0
+max_spawn_range = 1.0
+min_spawn_time = 0.25
+max_spawn_time = 1.0
+spawn_pool = 6

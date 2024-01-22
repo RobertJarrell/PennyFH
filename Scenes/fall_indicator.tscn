@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://de6yi44cen3xq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_algt3"]
+transparency = 1
+albedo_color = Color(0.988235, 0.694118, 0.109804, 0.266667)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8y8t3"]
+material = SubResource("StandardMaterial3D_algt3")
+height = 0.1
+
+[node name="FallIndicator" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_8y8t3")

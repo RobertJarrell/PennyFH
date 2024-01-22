@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw3sc7xskdp0d"]
+
+[ext_resource type="Script" path="res://Scripts/UI/basic_ui.gd" id="1_40phl"]
+[ext_resource type="Resource" uid="uid://bxnl7v024in85" path="res://Resources/game_data.tres" id="2_226ei"]
+
+[node name="BasicUI" type="CanvasLayer"]
+script = ExtResource("1_40phl")
+game_data = ExtResource("2_226ei")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HeadBoard" type="GridContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+columns = 2
+
+[node name="ScoreLabel" type="Label" parent="PanelContainer/MarginContainer/HeadBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Score: 0
+"
+
+[node name="HighScoreLabel" type="Label" parent="PanelContainer/MarginContainer/HeadBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "HighScore: 10000"
+horizontal_alignment = 2
+
+[node name="AttemptTracker" type="HSplitContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/AttemptTracker"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.619608, 1, 1, 1)
+
+[node name="AttemptLabel" type="Label" parent="PanelContainer/MarginContainer/AttemptTracker"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+text = "x 3"
+
+[node name="ComboLabel" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 32
+text = "x1"
+
+[node name="GameOverLabel" type="Label" parent="PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinLabel" type="Label" parent="PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "You Win"
+horizontal_alignment = 1
+vertical_alignment = 1

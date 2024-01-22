@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GameData" load_steps=2 format=3 uid="uid://bxnl7v024in85"]
+
+[ext_resource type="Script" path="res://Resources/game_data.gd" id="1_21ody"]
+
+[resource]
+script = ExtResource("1_21ody")
+score = 0
+high_score = 0
+combo_counter = 1
+player_attempts = 3

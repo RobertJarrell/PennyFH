@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://dly7q4d8jqpj8"]
+
+[ext_resource type="Script" path="res://Scripts/Player/player_token.gd" id="1_kq6o4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fm5ls"]
+radius = 0.125
+height = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_effhc"]
+radius = 0.025
+height = 0.175
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_16q0p"]
+top_radius = 0.015
+bottom_radius = 0.02
+height = 0.035
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lscmw"]
+top_radius = 0.075
+bottom_radius = 0.08
+height = 0.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_17vtl"]
+radius = 0.17
+height = 0.55
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3fa4y"]
+radius = 0.165
+height = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_l8dky"]
+size = Vector3(0.35, 0.15, 0.3)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x7x63"]
+radius = 0.05
+height = 0.7
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vtlyu"]
+radius = 0.1
+height = 0.9
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tcpe2"]
+radius = 0.1
+height = 0.9
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u13tv"]
+height = 1.0
+radius = 0.275
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8hdjf"]
+height = 1.0
+radius = 0.175
+
+[node name="PlayerToken" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_kq6o4")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Head" type="Node3D" parent="Visuals"]
+
+[node name="Face" type="MeshInstance3D" parent="Visuals/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72429, -0.029)
+mesh = SubResource("CapsuleMesh_fm5ls")
+
+[node name="Eyes" type="MeshInstance3D" parent="Visuals/Head/Face"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -0.0995192)
+mesh = SubResource("CapsuleMesh_effhc")
+
+[node name="Nose" type="MeshInstance3D" parent="Visuals/Head/Face"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0362726, -0.134404)
+mesh = SubResource("CylinderMesh_16q0p")
+
+[node name="Neck" type="MeshInstance3D" parent="Visuals/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57318, 0)
+mesh = SubResource("CylinderMesh_lscmw")
+
+[node name="Body" type="Node3D" parent="Visuals"]
+
+[node name="Chest" type="MeshInstance3D" parent="Visuals/Body"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 1.375, 0)
+mesh = SubResource("CapsuleMesh_17vtl")
+
+[node name="Torso" type="MeshInstance3D" parent="Visuals/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13159, 0)
+mesh = SubResource("CapsuleMesh_3fa4y")
+
+[node name="Hips" type="MeshInstance3D" parent="Visuals/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892807, 0)
+mesh = SubResource("BoxMesh_l8dky")
+
+[node name="Limbs" type="Node3D" parent="Visuals"]
+
+[node name="LeftArm" type="MeshInstance3D" parent="Visuals/Limbs"]
+transform = Transform3D(0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 0, 0, 1, -0.25, 1.12497, 0)
+mesh = SubResource("CapsuleMesh_x7x63")
+
+[node name="RightArm" type="MeshInstance3D" parent="Visuals/Limbs"]
+transform = Transform3D(0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0, 1, 0.25, 1.125, 0)
+mesh = SubResource("CapsuleMesh_x7x63")
+
+[node name="LeftLeg" type="MeshInstance3D" parent="Visuals/Limbs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, 0.45, 0)
+mesh = SubResource("CapsuleMesh_vtlyu")
+
+[node name="RightLeg" type="MeshInstance3D" parent="Visuals/Limbs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.45, 0)
+mesh = SubResource("CapsuleMesh_tcpe2")
+
+[node name="LowerBody" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_u13tv")
+
+[node name="UpperBody" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35486, 0)
+shape = SubResource("CylinderShape3D_8hdjf")
