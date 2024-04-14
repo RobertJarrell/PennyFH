@@ -6,13 +6,14 @@ extends Node
 @export var model : Node3D
 
 var speed
-var min_fall_speed : float = 0
-var max_fall_speed : float = 5
+var drop : float = 0
+var min_fall_speed : float = 1
+var max_fall_speed : float = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var varied_speed = randf_range(min_fall_speed, max_fall_speed)
-	speed = sheet.fall_speed + varied_speed
+	speed = sheet.fall_speed * varied_speed
 	
 
 
@@ -22,4 +23,6 @@ func _process(delta):
 
 
 func move(delta):
-	model.global_position.y = lerp(model.global_position.y, -speed * delta, delta)
+	
+	drop = lerp(drop, -speed * delta, delta)
+	model.global_position.y += drop

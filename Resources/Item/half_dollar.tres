@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_sj8rv")
-fall_speed = 6.0
+fall_speed = 1.0
 value = 500

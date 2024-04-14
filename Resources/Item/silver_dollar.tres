@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_30hvs")
-fall_speed = 7.0
+fall_speed = 0.5
 value = 1000
